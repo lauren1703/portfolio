@@ -1,0 +1,75 @@
+.face-recognition-merger {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  h3 {
+    color: #ffc108;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .face-select {
+    flex: 1;
+    margin-right: 10px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+  }
+  
+  .merge-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: black;
+    background-color: #ffc108;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .merge-button:hover {
+    background-color: #d09e08;
+  }
+  
+  .face-display {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  
+  .face-card {
+    text-align: center;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+  }
+  
+  .face-card h3 {
+    margin-top: 0;
+    color: #333;
+  }
+  
+  .face-card img {
+    max-width: 200px;
+    max-height: 200px;
+    object-fit: contain;
+  }
+  
+  .error-message {
+    color: #d9534f;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 20px;
+  }
