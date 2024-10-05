@@ -7,7 +7,7 @@ from sklearn.decomposition import PCA
 import base64
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": ["http://localhost:5173", "http://127.0.0.1:5173"]}})
+CORS(app, resources={r"/*": {"origins": ["http://localhost:5173", "http://127.0.0.1:5173", "https://laurenahhot-02c159a9b554.herokuapp.com/"]}})
 
 face_names = []
 faces = {}
@@ -89,4 +89,4 @@ def after_request(response):
 if __name__ == '__main__':
     load_faces()
     print("Loaded faces:", face_names)
-    app.run(debug=True, host='127.0.0.1', port=5000)
+    app.run(debug=False, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))

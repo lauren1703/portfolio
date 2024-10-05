@@ -14,9 +14,7 @@ import io
 import logging
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": ["http://localhost:5173", "http://127.0.0.1:5173"]}})
-
-logging.basicConfig(level=logging.DEBUG)
+CORS(app, resources={r"/*": {"origins": ["http://localhost:5173", "http://127.0.0.1:5173", "https://laurenahhot-02c159a9b554.herokuapp.com/"]}})
 
 faces = {}
 test_faces = {}
@@ -140,4 +138,4 @@ if __name__ == '__main__':
     prepare_pca()
     print("Loaded faces for", len(faces), "people")
     print("Removed person:", removed_person)
-    app.run(debug=True, host='0.0.0.0', port=5001)
+    app.run(debug=False, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
