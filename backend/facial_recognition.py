@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from flask import make_response
 import os
 import cv2
 import numpy as np
@@ -61,19 +62,38 @@ def prepare_pca():
 
 @app.route('/get_test_faces', methods=['GET'])
 def get_test_faces():
+    if request.method == "OPTIONS":
+        response = make_response()
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        response.headers.add('Access-Control-Allow-Headers', "*")
+        response.headers.add('Access-Control-Allow-Methods', "*")
+        return response
     logging.info("Fetching test faces")
-    test_faces_data = {}
-    for person_id, face in test_faces.items():
-        if face is not None:
-            _, buffer = cv2.imencode('.png', face)
-            face_base64 = base64.b64encode(buffer).decode('utf-8')
-            test_faces_data[person_id] = face_base64
-    
-    logging.info(f"Returning {len(test_faces_data)} test faces")
-    return jsonify(test_faces_data)
+    try:
+        test_faces_data = {}
+        for person_id, face in test_faces.items():
+            if face is not None:
+                _, buffer = cv2.imencode('.png', face)
+                face_base64 = base64.b64encode(buffer).decode('utf-8')
+                test_faces_data[person_id] = face_base64
+        
+        logging.info(f"Returning {len(test_faces_data)} test faces")
+        response = make_response(jsonify(test_faces_data))
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        return response
+    except Exception as e:
+        logging.error(f"Error in get_test_faces: {str(e)}")
+        return jsonify({"error": str(e)}), 500
 
 @app.route('/get_eigenfaces', methods=['POST'])
 def get_eigenfaces():
+    if request.method == "OPTIONS":
+        response = make_response()
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        response.headers.add('Access-Control-Allow-Headers', "*")
+        response.headers.add('Access-Control-Allow-Methods', "*")
+        return response
+    
     data = request.json
     person_id = data.get('person_id')
     logging.info(f"Generating eigenfaces for person {person_id}")
@@ -108,6 +128,13 @@ def get_eigenfaces():
 
 @app.route('/recognize_face', methods=['POST'])
 def recognize_face():
+    if request.method == "OPTIONS":
+        response = make_response()
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        response.headers.add('Access-Control-Allow-Headers', "*")
+        response.headers.add('Access-Control-Allow-Methods', "*")
+        return response
+    
     data = request.json
     person_id = data.get('person_id')
     
