@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './facemerger.scss'; 
 
+const API_BASE_URL = 'https://laurenahhot-02c159a9b554.herokuapp.com/';
+
 const FaceMerger = () => {
   const [faces, setFaces] = useState([]);
   const [face1, setFace1] = useState('');
@@ -11,7 +13,7 @@ const FaceMerger = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const apiUrl = 'http://127.0.0.1:5000/get_faces';
+
 
     fetch(apiUrl)
       .then(response => {
