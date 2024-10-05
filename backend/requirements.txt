@@ -1,7 +1,0 @@
-Flask
-Flask-CORS
-opencv-python
-numpy
-scikit-learn
-Pillow
-gunicorn
