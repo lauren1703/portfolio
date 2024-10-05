@@ -1,13 +1,8 @@
-from flask import Flask, jsonify, request, send_file
-from flask_cors import CORS
 import os
 import cv2
 import numpy as np
 from sklearn.decomposition import PCA
 import base64
-
-app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": ["http://localhost:5173", "http://127.0.0.1:5173", "https://laurenahhot-02c159a9b554.herokuapp.com/"]}})
 
 face_names = []
 faces = {}
@@ -24,41 +19,23 @@ def load_faces(directory='faces'):
         except Exception as e:
             print(f"Error loading face {file}: {str(e)}")
 
-@app.route('/', methods=['GET'])
-def home():
-    return "Face Merging API is running. Available routes: /get_faces, /get_face/<face_name>, /merge_faces"
-
-@app.route('/get_faces', methods=['GET'])
 def get_faces():
-    return jsonify({'faces': face_names})
+    return face_names
 
-@app.route('/get_face/<face_name>', methods=['GET'])
 def get_face(face_name):
     if face_name not in faces:
-        return jsonify({'error': 'Face not found'}), 404
-    
+        return None
     face_image = faces[face_name]
     _, buffer = cv2.imencode('.png', face_image)
-    face_image_base64 = base64.b64encode(buffer).decode('utf-8')
-    
-    return jsonify({'face_image': face_image_base64})
+    return base64.b64encode(buffer).decode('utf-8')
 
-@app.route('/merge_faces', methods=['POST', 'OPTIONS'])
-def merge_faces():
-    if request.method == 'OPTIONS':
-        return '', 204
-    
-    data = request.json
-    face_1_name = data['face1']
-    face_2_name = data['face2']
-
+def merge_faces(face_1_name, face_2_name):
     if face_1_name not in faces or face_2_name not in faces:
-        return jsonify({'error': 'One or both faces not found'}), 404
+        return None
 
     face_1 = faces[face_1_name]
     face_2 = faces[face_2_name]
 
-    # Perform face merging
     selected_faces_matrix = np.stack((face_1.flatten(), face_2.flatten()))
     pca_selected = PCA(n_components=2)
     pca_selected.fit(selected_faces_matrix)
@@ -74,19 +51,5 @@ def merge_faces():
 
     merged_face_selected = (pca_selected.mean_ + (eigenfaces_selected.T @ mixed_weights_selected)).reshape(face_1.shape)
 
-    # Convert the merged face to a base64 encoded string
     _, buffer = cv2.imencode('.png', merged_face_selected)
-    merged_face_base64 = base64.b64encode(buffer).decode('utf-8')
-
-    return jsonify({'merged_face': merged_face_base64})
-
-@app.after_request
-def after_request(response):
-    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
-    return response
-
-if __name__ == '__main__':
-    load_faces()
-    print("Loaded faces:", face_names)
-    app.run(debug=False, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
+    return base64.b64encode(buffer).decode('utf-8')
