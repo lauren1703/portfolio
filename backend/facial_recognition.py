@@ -78,39 +78,44 @@ def build_actual_response(response):
     response.headers.add("Access-Control-Allow-Origin", "https://laurenahhot-02c159a9b554.herokuapp.com")
     return response
 
+def build_response(data, status_code=200):
+    response = make_response(jsonify(data), status_code)
+    return response
+
 @app.route('/get_test_faces', methods=['GET', 'OPTIONS'])
 def get_test_faces():
     if request.method == "OPTIONS":
-        return build_preflight_response()
-    elif request.method == "GET":
-        logging.info("Fetching test faces")
-        try:
-            test_faces_data = {}
-            for person_id, face in test_faces.items():
-                if face is not None:
-                    _, buffer = cv2.imencode('.png', face)
-                    face_base64 = base64.b64encode(buffer).decode('utf-8')
-                    test_faces_data[person_id] = face_base64
-            
-            logging.info(f"Returning {len(test_faces_data)} test faces")
-            return build_actual_response(jsonify(test_faces_data))
-        except Exception as e:
-            logging.error(f"Error in get_test_faces: {str(e)}")
-            return build_actual_response(jsonify({"error": str(e)})), 500
+        return build_response({})
+    
+    logging.info("Fetching test faces")
+    try:
+        test_faces_data = {}
+        for person_id, face in test_faces.items():
+            if face is not None:
+                _, buffer = cv2.imencode('.png', face)
+                face_base64 = base64.b64encode(buffer).decode('utf-8')
+                test_faces_data[person_id] = face_base64
+        
+        logging.info(f"Returning {len(test_faces_data)} test faces")
+        return build_response(test_faces_data)
+    except Exception as e:
+        logging.error(f"Error in get_test_faces: {str(e)}")
+        return build_response({"error": str(e)}, 500)
 
 @app.route('/get_eigenfaces', methods=['POST', 'OPTIONS'])
 def get_eigenfaces():
     if request.method == "OPTIONS":
-        return build_preflight_response()
-    elif request.method == "POST":
-        data = request.json
-        person_id = data.get('person_id')
-        logging.info(f"Generating eigenfaces for person {person_id}")
-        
-        if person_id not in test_faces:
-            logging.error(f"Invalid person ID: {person_id}")
-            return build_actual_response(jsonify({'error': 'Invalid person ID'})), 400
-        
+        return build_response({})
+    
+    data = request.json
+    person_id = data.get('person_id')
+    logging.info(f"Generating eigenfaces for person {person_id}")
+    
+    if person_id not in test_faces:
+        logging.error(f"Invalid person ID: {person_id}")
+        return build_response({'error': 'Invalid person ID'}, 400)
+    
+    try:
         query = test_faces[person_id]
         query_weight = pca.transform([query.flatten()])[0]
         
@@ -130,22 +135,26 @@ def get_eigenfaces():
         plt.close(fig)
         
         logging.info("Eigenfaces generated successfully")
-        return build_actual_response(jsonify({
+        return build_response({
             'eigenfaces_image': eigenfaces_image,
             'weights_shape': query_weight.shape
-        }))
+        })
+    except Exception as e:
+        logging.error(f"Error in get_eigenfaces: {str(e)}")
+        return build_response({"error": str(e)}, 500)
 
 @app.route('/recognize_face', methods=['POST', 'OPTIONS'])
 def recognize_face():
     if request.method == "OPTIONS":
-        return build_preflight_response()
-    elif request.method == "POST":
-        data = request.json
-        person_id = data.get('person_id')
-        
-        if person_id not in test_faces:
-            return build_actual_response(jsonify({'error': 'Invalid person ID'})), 400
-        
+        return build_response({})
+    
+    data = request.json
+    person_id = data.get('person_id')
+    
+    if person_id not in test_faces:
+        return build_response({'error': 'Invalid person ID'}, 400)
+    
+    try:
         query = test_faces[person_id]
         query_weight = pca.transform([query.flatten()])[0]
         
@@ -160,11 +169,14 @@ def recognize_face():
         _, buffer = cv2.imencode('.png', best_match_face)
         best_match_face_base64 = base64.b64encode(buffer).decode('utf-8')
         
-        return build_actual_response(jsonify({
+        return build_response({
             'best_match': best_match_person,
             'distance': float(best_match_distance),
             'best_match_image': best_match_face_base64
-        }))
+        })
+    except Exception as e:
+        logging.error(f"Error in recognize_face: {str(e)}")
+        return build_response({"error": str(e)}, 500)
 
 def initialize_app():
     global faces, test_faces, pca, removed_person, faceshape
