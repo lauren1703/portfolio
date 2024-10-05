@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './facialrecognition.scss';
 
-const API_BASE_URL = 'https://laurenahhot-02c159a9b554.herokuapp.com/';
+const API_BASE_URL = 'https://laurenahhotbackend-4ded2bc5bdaf.herokuapp.com/';
 
 const FacialRecognition = () => {
   const [testFaces, setTestFaces] = useState({});
