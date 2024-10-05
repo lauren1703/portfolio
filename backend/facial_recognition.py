@@ -14,7 +14,7 @@ import io
 import logging
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": ["http://localhost:5173", "http://127.0.0.1:5173", "https://laurenahhot-02c159a9b554.herokuapp.com/"]}})
+CORS(app, resources={r"/*": {"origins": ["http://localhost:5173", "http://127.0.0.1:5173", "https://laurenahhot-02c159a9b554.herokuapp.com"]}})
 
 faces = {}
 test_faces = {}
@@ -24,6 +24,7 @@ faceshape = None
 
 def load_faces(zip_path="attface.zip"):
     global faces, test_faces, removed_person, faceshape
+    zip_path = os.path.join(os.path.dirname(__file__), zip_path)
     with zipfile.ZipFile(zip_path) as facezip:
         all_files = [f for f in facezip.namelist() if f.endswith(".pgm")]
         all_persons = set(f.split("/")[0] for f in all_files)
@@ -133,9 +134,15 @@ def recognize_face():
         'best_match_image': best_match_face_base64
     })
 
-if __name__ == '__main__':
+def initialize_app():
+    global faces, test_faces, pca, removed_person, faceshape
     load_faces()
     prepare_pca()
-    print("Loaded faces for", len(faces), "people")
-    print("Removed person:", removed_person)
-    app.run(debug=False, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
+    logging.info(f"Loaded faces for {len(faces)} people")
+    logging.info(f"Removed person: {removed_person}")
+
+if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO)
+    initialize_app()
+    port = int(os.environ.get('PORT', 5000))
+    app.run(debug=False, host='0.0.0.0', port=port)

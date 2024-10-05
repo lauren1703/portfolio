@@ -13,9 +13,7 @@ const FaceMerger = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-
-
-    fetch(apiUrl)
+    fetch(`${API_BASE_URL}/get_faces`)
       .then(response => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -33,7 +31,7 @@ const FaceMerger = () => {
 
   const fetchFaceImage = async (faceName, setFaceImage) => {
     try {
-      const response = await fetch(`http://127.0.0.1:5000/get_face/${faceName}`);
+      const response = await fetch(`${API_BASE_URL}/get_face/${faceName}`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -70,7 +68,7 @@ const FaceMerger = () => {
     }
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/merge_faces', {
+      const response = await fetch('${API_BASE_URL}/merge_faces', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
