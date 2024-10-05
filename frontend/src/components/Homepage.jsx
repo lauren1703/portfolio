@@ -69,13 +69,13 @@ const Homepage = () => {
     return (
         <div className="homepage" >
             <div className="sticky">
-                <div className="cafe" ref={cafe}><img src="/frontend/public/cafe.png" alt="Cafe" /></div>
-                <div className="left-side" ref={leftSide}><img src="/frontend/public//left_cafe.png" alt="Left Cafe Side" /></div>
+                <div className="cafe" ref={cafe}><img src="/cafe.png" alt="Cafe" /></div>
+                <div className="left-side" ref={leftSide}><img src="/left_cafe.png" alt="Left Cafe Side" /></div>
                 <div className="left-text" ref={leftText}>Welcome to...</div>
-                <div className="right-side" ref={rightSide}><img src="/frontend/public//right_cafe.png" alt="Right Cafe Side" /></div> 
+                <div className="right-side" ref={rightSide}><img src="right_cafe.png" alt="Right Cafe Side" /></div> 
                 <div className="right-text" ref={rightText}>...scroll to <br />continue</div>
-                <div className="poster" ref={poster}><img src="/frontend/public//poster.png" alt="Poster" /></div>
-                <div className="table" ref={table}><img src="/frontend/public//table.png" alt="Table" /></div>
+                <div className="poster" ref={poster}><img src="/poster.png" alt="Poster" /></div>
+                <div className="table" ref={table}><img src="/table.png" alt="Table" /></div>
             </div>
         </div>
     );

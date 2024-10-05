@@ -68,12 +68,12 @@ const Inside = () => {
     <div>
       <div className="inside" ref={inside}>
         <div className="counter" ref={counter}>
-          <img src="/frontend/public/counter.png" alt="Counter" />
+          <img src="/counter.png" alt="Counter" />
           <div 
             className="barista" 
             onClick={() => handleItemClick('barista')} 
             ref={barista}>
-            <img src="/frontend/public/barista.png" alt="Barista" />
+            <img src="/barista.png" alt="Barista" />
           </div>
           <div className="items">
             <div className="row1">
@@ -81,13 +81,13 @@ const Inside = () => {
                 className="croissant" 
                 onClick={() => handleItemClick('croissant')} 
                 ref={croissant}>
-                <img src="/frontend/public/croissant.png" alt="Croissant" />
+                <img src="/croissant.png" alt="Croissant" />
               </div>
               <div 
                 className="baguette" 
                 onClick={() => handleItemClick('baguette')} 
                 ref={baguette}>
-                <img src="/frontend/public/baguette.png" alt="Baguette" />
+                <img src="/baguette.png" alt="Baguette" />
               </div>
             </div>
             <div className="row2">
@@ -95,20 +95,20 @@ const Inside = () => {
                 className="cake" 
                 onClick={() => handleItemClick('cake')} 
                 ref={cake}>
-                <img src="/frontend/public/cake.png" alt="Cake" />
+                <img src="/cake.png" alt="Cake" />
               </div>
               <div 
                 className="loaf" 
                 onClick={() => handleItemClick('loaf')} 
                 ref={loaf}>
-                <img src="/frontend/public/loaf.png" alt="Loaf" />
+                <img src="/loaf.png" alt="Loaf" />
               </div>
             </div>
           </div>
         </div>
 
         <div className={`hanging_sign ${isSignRotated ? 'rotate-out' : '' }`} ref={hanging_sign}>
-          <img src="/frontend/public//hanging_sign.png" alt="Hanging Sign" />
+          <img src="/hanging_sign.png" alt="Hanging Sign" />
         </div>
 
         <div className={`container ${isContainerOpen ? 'slide-in' : 'slide-out'}`} ref={container}>

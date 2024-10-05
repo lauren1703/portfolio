@@ -14,13 +14,13 @@ export default defineConfig({
       }
     }
   },
-  root: path.resolve(__dirname, 'frontend'),
-  publicDir: path.resolve(__dirname, 'frontend/public'),
   build: {
-    outDir: path.resolve(__dirname, 'dist'),
-    emptyOutDir: true
+    assetsDir: 'assets',
+    rollupOptions: {
+      output: {
+        assetFileNames: 'assets/[name].[hash][extname]'
+      }
+    }
   },
-  server: {
-    open: true
-  }
+  publicDir: 'public'
 })

@@ -27,7 +27,7 @@ const ContainerContent = ({ activeItem }) => {
             <li>Favorite Drink: Iced matcha latte</li>
             <li>Fun Fact: I run a nail business on campus!</li>
           </ul>
-          <p><br></br><a className="resume-button" href="/frontend/public/resume.pdf" target="_blank" rel="noopener noreferrer">
+          <p><br></br><a className="resume-button" href="/resume.pdf" target="_blank" rel="noopener noreferrer">
             View Resume
           </a></p>
           <h3>Contact Info</h3>
@@ -45,7 +45,7 @@ const ContainerContent = ({ activeItem }) => {
           <h2>The Commercial Croissant: Bath Bomb Business Project</h2>
           <div className="demo-container">
             <div className="laptop-container">
-              <img src="/frontend/public/laptop.png" alt="Laptop" className="laptop-image" />
+              <img src="/laptop.png" alt="Laptop" className="laptop-image" />
               <div className="video-container">
                 <video 
                   ref={videoRef}
@@ -55,7 +55,7 @@ const ContainerContent = ({ activeItem }) => {
                   muted
                   loop
                 >
-                  <source src="/frontend/public/demo.mp4" type="video/mp4" />
+                  <source src="/demo.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
               </div>
