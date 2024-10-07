@@ -1,23 +1,24 @@
 {
-  "name": "starter",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "name": "lauren-ahhot-portfolio",
+  "version": "1.0.0",
+  "description": "Lauren Ahhot's Portfolio",
+  "main": "index.js",
   "scripts": {
-    "start-api": "flask run --port=5001",
-    "dev": "vite",
-    "build": "vite build",
+    "start": "cd server && python app.py",
     "heroku-postbuild": "cd client && npm install && npm run build",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "dev": "cd client && npm run dev"
   },
+  "engines": {
+    "node": "14.x",
+    "npm": "6.x"
+  },
+  "cacheDirectories": ["client/node_modules"],
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^1.7.7",
     "framer-motion": "^10.16.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "sass": "^1.68.0",
-    "serve": "^14.2.3"
+    "sass": "^1.68.0"
   },
   "devDependencies": {
     "@types/react": "18.2.15",
