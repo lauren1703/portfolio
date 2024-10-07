@@ -13,16 +13,13 @@ import logging
 faces = {}
 test_faces = {}
 pca = None
-removed_person = None
+removed_person = "s15"  
 faceshape = None
 
 def load_faces(zip_path="attface.zip"):
     global faces, test_faces, removed_person, faceshape
     with zipfile.ZipFile(zip_path) as facezip:
         all_files = [f for f in facezip.namelist() if f.endswith(".pgm")]
-        all_persons = set(f.split("/")[0] for f in all_files)
-        
-        removed_person = "s15"
         
         for filename in all_files:
             person_id = filename.split("/")[0]
@@ -37,7 +34,7 @@ def load_faces(zip_path="attface.zip"):
                 if person_id == removed_person:
                     if test_faces[person_id] is None:
                         test_faces[person_id] = face
-                elif test_faces[person_id] is None and random.random() < 0.1:
+                elif test_faces[person_id] is None and len(faces[person_id]) == 9:  # Use the 10th image as test
                     test_faces[person_id] = face
                 else:
                     faces[person_id].append(face)
@@ -116,5 +113,6 @@ def recognize_face(person_id):
     return {
         'best_match': best_match_person,
         'distance': float(best_match_distance),
-        'best_match_image': best_match_face_base64
+        'best_match_image': best_match_face_base64,
+        'is_removed_person': person_id == removed_person  # New field
     }
