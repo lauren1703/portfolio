@@ -1,0 +1,389 @@
+@keyframes glow {
+    0% {filter: drop-shadow(0 0 10px rgba(255, 165, 0, 0.6));}
+    50% {filter: drop-shadow(0 0 20px rgba(255, 165, 0, 0.9));}
+    100% {filter: drop-shadow(0 0 10px rgba(255, 165, 0, 0.6));}
+  }
+
+  @keyframes glowPulse {
+    0% {
+      transform: scale(1);
+      filter: drop-shadow(0 0 10px rgba(205, 135, 4, 0.673));
+    }
+    50% {
+      transform: scale(1.05);
+      filter: drop-shadow(0 0 20px rgba(255, 165, 0, 0.9));
+    }
+    100% {
+      transform: scale(1);
+      filter: drop-shadow(0 0 10px rgba(205, 135, 4, 0.673));
+    }
+  }
+
+  @keyframes upDown {
+    0% {transform: translateY(0px);}
+    50% {transform: translateY(-10px);}
+    100% {transform: translateY(0px);}
+  }
+
+  @keyframes scaleUp {
+    0% {transform: scale(1);}
+    50% {transform: scale(1.05);}
+    100% {transform: scale(1);}
+  }
+  
+  .glowing-item {
+    filter: drop-shadow(0 0 15px rgba(255, 191, 0, 0.8));
+    animation: glow 1.5s infinite ease-in-out; /* Apply the glowing effect */
+    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out; /* Smooth transition when hovered */
+  }
+
+  .glowing-pulsing-item {
+    filter: drop-shadow(0 0 15px rgba(255, 165, 0, 0.8));
+    animation: glowPulse 1.5s infinite ease-in-out; /* Apply the glowing effect */
+    transition: transform 1s ease-in-out, filter 0.3s ease-in-out; /* Smooth transition when hovered */
+  }
+  
+  .glowing-item:hover {
+    animation: scaleUp 1.5s infinite ease-in-out;
+    transform-origin: 50% 90%;
+    filter: drop-shadow(0 0 30px rgb(255, 141, 10)); /* Stronger glow */
+  }
+
+  .glowing-pulsing-item:hover {
+    animation: upDown 1.5s infinite ease-in-out;
+    transform: scale(1.2); /* Move up and scale larger */
+    filter: drop-shadow(0 0 30px rgb(255, 141, 10)); /* Stronger glow */
+  }
+  
+
+  .inside {
+
+    .sticky {
+        position: sticky;
+        top: 0px;
+        height: 100vh;
+        overflow: visible;
+        
+      }
+    .counter {
+      position: absolute;
+      height: 100vh;
+      width: auto;
+      object-fit: cover;
+      right: 0;
+      top: 0%;
+      transform-origin: top;
+    }
+
+    .barista {
+      cursor: pointer;
+      @extend .glowing-item;
+      position: absolute;
+      height: 42vh;
+      right: 27%;
+      top: 7%;
+    }
+
+    .items {
+      position: absolute;
+      bottom: 10%;
+      right: 30%;
+
+      .row1, .row2 {
+        bottom: 0;
+        height: 40%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 5%;
+        gap: 15%;
+      }
+
+      .row1 {
+        margin-bottom: 15%;
+      }
+
+      .croissant, .baguette, .loaf, .cake {
+        cursor: pointer;
+        @extend .glowing-pulsing-item;
+        animation: pulse 1.5 infinite ease-in-out;
+        width: 20%;
+      }
+    }
+
+    @keyframes hanging {
+      0% {
+        transform: rotate(0deg);
+      }
+      25% {
+        transform: rotate(3deg);
+      }
+      50% {
+        transform: rotate(0deg);
+      }
+      75% {
+        transform: rotate(-5deg);
+      }
+      100% {
+        transform: rotate(0deg);
+      }
+    }
+
+    @keyframes rotateOut {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(-180deg) ;
+        }
+    }
+    
+    @keyframes rotateIn {
+    0% {
+        transform: rotate(-180deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+    }
+
+    .hanging_sign {
+      animation: hanging 3s infinite ease-in-out;
+      transition: transform 1s ease-in-out;
+      transform-origin: top;
+      position: absolute;
+      top: -2%;
+      width: 15%;
+      left: 10%;
+      transform: rotate(0deg);
+      will-change: transform;
+
+      &.rotate-out {
+        animation: rotateOut 1.5s forwards ease-in-out;
+      }
+
+      &:not(.rotate-out) {
+        animation: rotateIn 1s ease-in-out, hanging 3s infinite ease-in-out 1s;
+      }
+    }
+    
+    .container {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 50%; // Adjust this value to your preference
+      height: 100vh;
+      background-color: #6e210a;
+      opacity: 95%;
+      color: white;
+      padding: 20px;
+      // border-radius: 15px;
+      overflow-y: auto;
+      transform: translateX(-100%); /* Start hidden (offscreen) */
+      transition: transform 1s ease-in-out; /* Smooth slide in */
+
+      &.slide-in {
+          transform: translateX(0%);
+        }
+        
+      &.slide-out {
+        transform: translateX(-100%);
+      }
+        
+      .close-tab {
+        position: sticky;
+        top: 10px;
+        right: 10px;
+        float: right;
+        cursor: pointer;
+        font-size: 24px;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.3);
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        transition: background-color 0.3s ease;
+    
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.5);
+        }
+      }
+
+      .content {
+        padding: 50px 20px 20px 20px;
+      }
+
+    }
+    h2 {
+      color: #ffc108; // Gold color for headers
+      margin-bottom: 15px;
+      font-size: 24px;
+      text-align: center;
+    }
+
+    p {
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+      margin-bottom: 15px;
+
+      li {
+        margin-bottom: 10px;
+        &:before {
+          content: "✦"; 
+          color: #ffc108;
+          margin-right: 8px;
+        }
+      }
+    }
+
+    a {
+      color: #ffc108; 
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #d09e08; 
+        text-decoration: underline;
+      }
+    }
+    .croissant-content {
+      display: flex;
+      flex-direction: column;
+
+      padding: 20px;
+
+      .links {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 50px;
+        margin-bottom: 20px;
+      }
+
+      .laptop-container {
+        position: relative;
+        width: 100%;
+        margin-bottom: 10px;
+        margin-left: 11%;
+      }
+  
+      .laptop-image {
+        width: 80%;
+        height: auto;
+        display: block;
+      }
+  
+      .video-container {
+        position: absolute;
+        top: 20%;  
+        left: 9.5%;
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+      }
+  
+      video {
+        width: 61.5%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+        .note {
+          font-style: italic;
+          
+        }
+      }
+
+      .baguette-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        
+        p {
+          margin-top: 20px;
+        }
+
+        a {
+          margin-top: 20px;
+        }
+      }
+
+      .cake-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        
+        p {
+          margin-top: 20px;
+        }
+      }
+
+      .barista-content {
+        
+        .resume-button {
+          display: inline-block;
+          padding: 12px 24px;
+          font-size: 18px;
+          font-weight: bold;
+          text-transform: uppercase;
+          color: black;
+          background-color: #ffc108;
+          border: none;
+          border-radius: 10px;
+          box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+          transition: all 0.3s ease;
+          cursor: pointer;
+          text-decoration: none;
+          position: relative;
+          overflow: hidden;
+        }
+        
+        .resume-button:before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+          transform: translateX(-100%);
+          transition: 0.6s;
+        }
+        
+        .resume-button:hover {
+          background-color: #d09e08;
+          transform: translateY(-2px);
+          box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+        }
+        
+        .resume-button:hover:before {
+          transform: translateX(100%);
+        }
+        
+        .resume-button:active {
+          transform: translateY(1px);
+        }
+        
+        @media (max-width: 768px) {
+          .resume-button {
+            font-size: 16px;
+            padding: 10px 20px;
+          }
+        }
+        
+      }
+
+    
+  }

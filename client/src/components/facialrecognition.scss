@@ -1,0 +1,117 @@
+.facial-recognition {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  h3 {
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  select, button {
+    margin: 10px 0;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: #f0f0f0;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #ffc108;
+    }
+  }
+
+  button {
+    background-color: #ffc108;
+    color: black;
+
+    &:hover {
+      background-color: #d09e08;
+    }
+
+    &:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+    }
+  }
+
+  .error {
+    color: #dc3545;
+    margin: 10px 0;
+  }
+
+  .face-comparison {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 600px;
+    margin-top: 20px;
+
+    .selected-face, .recognition-result {
+      background-color: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      width: 48%;
+
+      h4, h5 {
+        color: #333;
+        margin-bottom: 10px;
+        font-size: 1em;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px;
+        margin-top: 10px;
+      }
+    }
+
+    .recognition-result {
+      p {
+        font-size: 0.9em;
+        margin: 5px 0;
+      }
+    }
+  }
+
+  .eigenfaces {
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+
+    h4 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+
+    p {
+      font-size: 0.9em;
+      margin-top: 20px;
+    }
+  }
+}

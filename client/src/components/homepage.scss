@@ -1,0 +1,151 @@
+html, body {
+  height: 100%;  
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  height: 100%;
+  width: 100%;
+}
+
+.homepage {
+    z-index: 10;
+    position: relative;
+    width: 100%;
+    min-height: 2000vh; 
+    height: auto;
+    overflow: visible;
+
+    .sticky {
+      position: sticky;
+      top: 0px;
+      height: 100vh;
+      overflow: visible;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInFromLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-100%);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    @keyframes fadeInFromRight {
+      from {
+        opacity: 0;
+        transform: translateX(100%);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .left-text, .right-text {
+        font-size: 2.5rem;
+        color: white;
+        text-shadow: 0 0 10px #fff, 0 0 0px #432018, 0 0 0px #432018, 0 0 0px #432018, 0 0 10px #432018; // Glowing effect
+        position: absolute;
+        top: 12%; 
+        
+    }
+
+    .left-text {
+        left: 10%; 
+        animation: fadeIn 1.5s ease-out forwards;
+    }
+
+    .right-text {
+        right: 12%; 
+        text-align: right;
+        animation: fadeIn 1.5s ease-out forwards;
+    }
+
+    .cafe {
+        animation: fadeIn 1.5s ease-out forwards;
+        width: 100%;
+        height: 100%;
+        left: 2%;
+        position: absolute;
+        // top: 50%;
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            height: 100%;
+            width: auto;
+        }
+        transform-origin: 50% 80%;
+        
+      }
+
+      // Left side of the cafe
+    .left-side {
+        position: absolute;
+        width: 50%;  // Adjust based on your image size
+        height: 100%;
+        top: 0; // Keep aligned with the top of the sticky section
+        opacity: 0; // Initially hidden
+        visibility: hidden;
+        left: 70%; // Positioning left edge of the element at the center of the screen
+        transform: translateX(-100%); 
+        z-index: 10;
+    }
+
+    // Right side of the cafe
+    .right-side {
+        position: absolute;
+        width: 50%; // Adjust based on your image size
+        height: 100%;
+        top: 0; // Keep aligned with the top of the sticky section
+        opacity: 0; // Initially hidden
+        visibility: hidden;
+        right: 70%; // Positioning left edge of the element at the center of the screen
+        transform: translateX(100%); 
+        z-index: 10;
+    }
+      
+      .poster {
+        animation: fadeIn 1.5s ease-out forwards;
+        position: absolute;
+        // transform: translateY(50%);
+        // transition: transform 0.1s;
+        bottom: 0%;
+        left: 15%;
+        transform: scale(0.7);
+        transform-origin: 10% bottom;
+        }
+
+      .table {
+        animation: fadeIn 1.5s ease-out forwards;
+        position: absolute;
+        width: auto;
+        height: auto;
+        //top: 50%;
+        // transform: translateY(-50%);
+        // transition: transform 0.1s;
+        bottom: 0%;
+        left: 55%;
+        transform: scale(0.7);
+        transform-origin: bottom;
+      }
+
+      
+
+
+      
+}
