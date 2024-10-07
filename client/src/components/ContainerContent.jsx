@@ -73,11 +73,11 @@ const ContainerContent = ({ activeItem }) => {
               </a>
             </div>
           
-          <p>I founded an online handmade bath bomb business and developed an engaging and aesthetic e-commerce website to boost conversion rates.</p>
+          <p>I founded an online handmade bath bomb business and developed an engaging and aesthetic e-commerce website to boost customer click-through conversion rates.</p>
           <ul>
             <li>Handmade and sold 1300+ bath products, donating $5500+ to charities helping give access to clean water for people in need. </li>
-            <li>Featured in 3 online articles. growing to 650+ followers on social media.</li>
-            <li>Invited to hold booth at 3 events, including a UOB corporate event, and completed bulk orders for Meta.</li>
+            <li>Created products for Meta and American Express. Invited to showcase products in corporate events such as UOB.</li>
+            <li>Featured in 3 online articles, growing to 650+ followers on social media.</li>
             <li>Received Beauty & Wellness Awards by Beauty Insider: Readers' & Bloggers' Choice Awards for Best Body Care</li>
           </ul>
           <p>Languages/Tools:</p>
@@ -99,7 +99,8 @@ const ContainerContent = ({ activeItem }) => {
               </a>
           <p>The program allows users to select a test face and performs facial recognition using eigenfaces. 
             It displays the selected face, the best match from the dataset, and visualizes the eigenfaces used 
-            in the recognition process.</p>
+            in the recognition process. "Person s15" test face is outside the training set of faces, so it will find the 
+            closest matching face instead.</p>
           <p>Languages/Tools:</p>
           <ul>
             <li>Backend: Python with Flask for API development</li>
@@ -113,13 +114,12 @@ const ContainerContent = ({ activeItem }) => {
     case 'cake':
       return (
         <div className="cake-content">
-          <h2>The Merged Muffin: Face Merging Program</h2>
+          <h2>The Mosaic Muffin: Face Merging Program</h2>
           <FaceMerger />
           <a href="https://github.com/lauren1703/facemerger" target="_blank" rel="noopener noreferrer">
                 Github
               </a>
-          <p>This program allows users to select two faces from a dataset and merge them using PCA, demonstrating
-            how eigenfaces can be used not just for recognition, but also for generating new facial images. </p>
+          <p>This program, from a collected dataset of headshots, takes distinct eigenfaces and merges them to construct a new face.</p>
           <p>Languages/Tools:</p>
           <ul>
             <li>Backend: Python with Flask for API development</li>
@@ -133,7 +133,7 @@ const ContainerContent = ({ activeItem }) => {
     case 'loaf':
       return (
         <div className="loaf-content">
-          <h2>Artisanal Bread Loaves</h2>
+          <h2>Lauren's Lovely Loaf (Upcoming)</h2>
           <p>From sourdough to whole grain, our bread loaves are the heart of our bakery.</p>
           <ul>
             <li>Naturally leavened sourdough</li>

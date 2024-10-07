@@ -22,7 +22,7 @@ def load_faces(zip_path="attface.zip"):
         all_files = [f for f in facezip.namelist() if f.endswith(".pgm")]
         all_persons = set(f.split("/")[0] for f in all_files)
         
-        removed_person = random.choice(list(all_persons))
+        removed_person = "s15"
         
         for filename in all_files:
             person_id = filename.split("/")[0]
